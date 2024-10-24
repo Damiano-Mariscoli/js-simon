@@ -18,9 +18,11 @@ function getRandomInt(min, max) {
 let listAfter = document.querySelectorAll('ul.list-unstyled li')
 startButton.addEventListener('click', () => {
     // Gestiamo i bottoni
+    count =0
+    livello = 5
     startButton.classList.add('d-none')
     startButton.disabled = true;
-    for(i = 0;  i < 5; i++){
+    for(i = 0;  i < livello; i++){
         const randomNum = document.createElement('li')
         randomNum.innerText = getRandomInt(min , max)
         randomList.appendChild(randomNum)
@@ -29,7 +31,7 @@ startButton.addEventListener('click', () => {
     
   
     // Gestiamo il timer
-    count = 0;
+    
     countDown.innerText = count;
     // incremento il tempo
     timer =setInterval(() => {
@@ -50,14 +52,21 @@ startButton.addEventListener('click', () => {
             console.log(arrayInput)
 
             let correctNum = 0;
+            let wichNum = []
+            let notCorrect = []
             arrayNum.forEach(num => {
                 if (arrayInput.includes(num)) {
                     correctNum++;
+                    wichNum.push(num);
+                    
+                    
+                }else{
+                    notCorrect.push(num)
                 }
             });
             console.log(`Hai azzeccato ${correctNum} numeri`);
-            if(arrayInput.length === arrayInput.length){
-                const result = `Hai azzeccato ${correctNum} numeri`;
+            if(arrayInput.length === arrayNum.length){
+                const result = `Hai azzeccato ${correctNum} numeri: ${wichNum} Numeri mancanti: ${notCorrect}`
                 instructions.innerText = result;
                 formNum.classList.add('d-none');
                 confirmButton.disabled = true;
