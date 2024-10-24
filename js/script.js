@@ -77,7 +77,7 @@ startButton.addEventListener("click", () => {
           }
 
           console.log(`Hai azzeccato ${correctNum} numeri`);
-          if (arrayInput.length === 5) {
+          if (arrayInput.length === livello) {
             const result = `Hai azzeccato ${correctNum} numeri: ${wichNum} Numeri mancanti: ${notCorrect}`;
             instructions.innerText = result;
             formNum.classList.add("d-none");
