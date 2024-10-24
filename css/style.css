@@ -1,7 +1,10 @@
 /* Generics */
 
 /* # COUNTDOWN */
-
+body{
+	background-image: url(/img/space-background-spaceship-arcade-game-090062351_prevstill-495630951.jpeg);
+	background-size: cover;
+}
 #countdown {
 	font-weight: bolder;
 	font-size: 5rem;
