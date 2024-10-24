@@ -3,8 +3,10 @@
 const countDown = document.getElementById('countdown')
 const startButton = document.querySelector('.btn-success')
 const randomList = document.querySelector('ul.list-unstyled')
+const formNum = document.getElementById('answers-form')
+const instructions = document.getElementById('instructions')
 const min = 1;
-const max = 100;
+const max = 50;
 
 
 function getRandomInt(min, max) {
@@ -15,6 +17,7 @@ function getRandomInt(min, max) {
 
 startButton.addEventListener('click', () => {
     // Gestiamo i bottoni
+    startButton.classList.add('d-none')
     startButton.disabled = true;
     for(i = 0;  i < 5; i++){
         const randomNum = document.createElement('li')
@@ -25,14 +28,14 @@ startButton.addEventListener('click', () => {
     
   
     // Gestiamo il timer
-    count = 5;
+    count = 0;
     countDown.innerText = count;
-  
     // incremento il tempo
     timer =setInterval(() => {
       if (count === 0) {
-        document.querySelectorAll('ul.list-unstyled li').forEach(el => el.remove());
-        
+        document.querySelectorAll('ul.list-unstyled li').forEach(i => i.remove());
+        formNum.classList.remove('d-none')
+        instructions.innerText = "Scrivi i numeri che ricordi!";
       } else {
         
         countDown.innerText = --count;
