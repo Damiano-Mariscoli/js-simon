@@ -9,49 +9,57 @@ const min = 1;
 const max = 50;
 let count = 5;
 let livello = 5;
+let arrayRandom = [];
 
-function getRandomInt(min, max) {
+function getRandomInt(min, max, array) {
   const minCeiled = Math.ceil(min);
   const maxFloored = Math.floor(max);
-  return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled); 
+  let randomNumber = Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
+  if (array.includes(randomNumber)) {
+    return getRandomInt(min, max, array);
+  } else {
+    array.push(randomNumber);
+    return randomNumber;
+  }
 }
-let listAfter = document.querySelectorAll("ul.list-unstyled li");
+
 startButton.addEventListener("click", () => {
-  
   startButton.classList.add("d-none");
   startButton.disabled = true;
-  for (i = 0; i < livello; i++) {
+  for (let i = 0; i < livello; i++) {
     const randomNum = document.createElement("li");
-    randomNum.innerText = getRandomInt(min, max);
+    randomNum.innerText = getRandomInt(min, max, arrayRandom);
     randomList.appendChild(randomNum);
   }
-  const listAfter = document.querySelectorAll("ul.list-unstyled li");
-
-  
-
   countDown.innerText = count;
   
   let timer = setInterval(() => {
-    if (count === 0) {
-        countDown.classList.add("d-none")
-      console.log(listAfter);
+    if (count == 0) {
+      countDown.classList.add("d-none")
+      console.log(arrayRandom);
       
-      for (let i = 0; i < listAfter.length; i++) {
-        listAfter[i].classList.add("d-none");
+      for (let j = 0; j < arrayRandom.length; j++) {
+        const li = randomList.children[j];
+        if (li) {
+          li.classList.add("d-none");
+        }
       }
       formNum.classList.remove("d-none");
       instructions.innerText = "Scrivi i numeri che ricordi!";
       clearInterval(timer);
+      confirmButton.classList.remove("d-none");
 
       confirmButton.addEventListener("click", () => {
-        let arrayNum = Array.from(listAfter).map((i) => i.textContent);
+        let arrayNum = arrayRandom;
         console.log(arrayNum);
 
-        let arrayInput = Array.from(document.querySelectorAll("input")).map(
-          (i) => i.value);
+        let arrayInput = [];
+        for (let i = 0; i < document.querySelectorAll("input").length; i++) {
+          arrayInput.push(document.querySelectorAll("input")[i].value);
+        }
         console.log(arrayInput);
         for (let i = 0; i < arrayInput.length; i++) {
-          if (arrayInput[i] > 50 ||arrayInput[i] === ""){
+          if (arrayInput[i] > 50 || arrayInput[i] === "" || arrayInput.indexOf(arrayInput[i]) !== i) {
             error.classList.remove("d-none");
             setTimeout(() => {
               error.classList.add("d-none");
@@ -61,6 +69,7 @@ startButton.addEventListener("click", () => {
           }
         }
         
+
 
         let correctNum = 0;
         let wichNum = [];
@@ -89,6 +98,7 @@ startButton.addEventListener("click", () => {
       count--;
       countDown.innerText = count;
     }
-  }, 1000);
-});
+
+  }, 1000)
+})
 
