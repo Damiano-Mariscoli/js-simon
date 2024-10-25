@@ -49,7 +49,8 @@ startButton.addEventListener("click", () => {
       clearInterval(timer);
       confirmButton.classList.remove("d-none");
 
-      confirmButton.addEventListener("click", () => {
+      formNum.addEventListener('submit', function (event) {
+        event.preventDefault();
         let arrayNum = arrayRandom;
         console.log(arrayNum);
 
@@ -64,7 +65,7 @@ startButton.addEventListener("click", () => {
             setTimeout(() => {
               error.classList.add("d-none");
             }, 3000);
-            event.preventDefault(true);
+            event.preventDefault();
             return;
           }
         }
