@@ -6,7 +6,7 @@ const formNum = document.getElementById("answers-form");
 const instructions = document.getElementById("instructions");
 const error = document.getElementById("error-popup")
 const min = 1;
-const max = 50;
+const max = 10;
 let count = 5;
 let livello = 5;
 let arrayRandom = [];
@@ -15,13 +15,20 @@ function getRandomInt(min, max, array) {
   const minCeiled = Math.ceil(min);
   const maxFloored = Math.floor(max);
   let randomNumber = Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
+  console.log(randomNumber)
+  console.log(array)
   if (array.includes(randomNumber)) {
+    console.log(randomNumber)
+    console.log(array)
     return getRandomInt(min, max, array);
+    
   } else {
+    console.log(array)
     array.push(randomNumber);
     return randomNumber;
   }
 }
+
 
 startButton.addEventListener("click", () => {
   startButton.classList.add("d-none");
