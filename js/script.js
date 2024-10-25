@@ -86,7 +86,7 @@ startButton.addEventListener("click", () => {
 
         for (let i = 0; i < arrayNum.length; i++) {
           const num = arrayNum[i];
-          if (arrayInput.includes(num)) {
+          if (arrayInput.includes(num.toString())) {
             correctNum++;
             wichNum.push(num);
           } else {
@@ -109,4 +109,5 @@ startButton.addEventListener("click", () => {
 
   }, 1000)
 })
+
 
